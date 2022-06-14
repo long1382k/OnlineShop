@@ -194,7 +194,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public DetailProductInfoDTO getDetailProductById(String id) {
         Optional<Product> rs = productRepository.findById(id);
-        if (rs.isPresent()) {
+        if (!rs.isPresent()) {
             throw new NotFoundException("Sản phẩm không tồn tại");
         }
         Product product = rs.get();
@@ -234,7 +234,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductInfoDTO> getRelatedProducts(String id) {
         Optional<Product> product = productRepository.findById(id);
-        if (product.isPresent()) {
+        if (!product.isPresent()) {
             throw new NotFoundException("Sản phẩm không tồn tại");
         }
         List<ProductInfoDTO> products = productRepository.getRelatedProducts(id, LIMIT_PRODUCT_RELATED);

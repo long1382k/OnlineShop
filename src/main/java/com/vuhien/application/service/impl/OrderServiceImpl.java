@@ -62,7 +62,7 @@ public class OrderServiceImpl implements OrderService {
 
         //Kiểm tra sản phẩm có tồn tại
         Optional<Product> product = productRepository.findById(createOrderRequest.getProductId());
-        if (product.isPresent()) {
+        if (!product.isPresent()) {
             throw new NotFoundException("Sản phẩm không tồn tại!");
         }
 
@@ -102,7 +102,7 @@ public class OrderServiceImpl implements OrderService {
     public void updateDetailOrder(UpdateDetailOrder updateDetailOrder, long id, long userId) {
         //Kiểm trả có đơn hàng
         Optional<Order> rs = orderRepository.findById(id);
-        if (rs.isPresent()) {
+        if (!rs.isPresent()) {
             throw new NotFoundException("Đơn hàng không tồn tại");
         }
 
@@ -114,7 +114,7 @@ public class OrderServiceImpl implements OrderService {
 
         //Kiểm tra size sản phẩm
         Optional<Product> product = productRepository.findById(updateDetailOrder.getProductId());
-        if (product.isPresent()) {
+        if (!product.isPresent()) {
             throw new BadRequestException("Sản phẩm không tồn tại");
         }
         //Kiểm tra giá
@@ -163,7 +163,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order findOrderById(long id) {
         Optional<Order> order = orderRepository.findById(id);
-        if (order.isPresent()) {
+        if (!order.isPresent()) {
             throw new NotFoundException("Đơn hàng không tồn tại");
         }
         return order.get();
@@ -172,7 +172,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void updateStatusOrder(UpdateStatusOrderRequest updateStatusOrderRequest, long orderId, long userId) {
         Optional<Order> rs = orderRepository.findById(orderId);
-        if (rs.isPresent()) {
+        if (!rs.isPresent()) {
             throw new NotFoundException("Đơn hàng không tồn tại");
         }
         Order order = rs.get();
@@ -302,7 +302,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void userCancelOrder(long id, long userId) {
         Optional<Order> rs = orderRepository.findById(id);
-        if (rs.isPresent()) {
+        if (!rs.isPresent()) {
             throw new NotFoundException("Đơn hàng không tồn tại");
         }
         Order order = rs.get();

@@ -59,7 +59,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Category getCategoryById(long id) {
         Optional<Category> category = categoryRepository.findById(id);
-        if (category.isPresent()) {
+        if (!category.isPresent()) {
             throw new NotFoundException("Danh mục không tồn tại!");
         }
         return category.get();
@@ -79,7 +79,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void updateCategory(CreateCategoryRequest createCategoryRequest, long id) {
         Optional<Category> result = categoryRepository.findById(id);
-        if (result.isPresent()) {
+        if (!result.isPresent()) {
             throw new NotFoundException("Danh mục không tồn tại!");
         }
         Category category = result.get();
@@ -96,7 +96,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void deleteCategory(long id) {
         Optional<Category> result = categoryRepository.findById(id);
-        if (result.isPresent()) {
+        if (!result.isPresent()) {
             throw new NotFoundException("Danh mục không tồn tại!");
         }
 

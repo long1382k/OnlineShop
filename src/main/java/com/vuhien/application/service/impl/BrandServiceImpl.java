@@ -57,7 +57,7 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public void updateBrand(CreateBrandRequest createBrandRequest, Long id) {
         Optional<Brand> brand = brandRepository.findById(id);
-        if (brand.isPresent()) {
+        if (!brand.isPresent()) {
             throw new NotFoundException("Tên nhãn hiệu không tồn tại!");
         }
         Brand br = brandRepository.findByName(createBrandRequest.getName());
@@ -83,7 +83,7 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public void deleteBrand(long id) {
         Optional<Brand> brand = brandRepository.findById(id);
-        if (brand.isPresent()) {
+        if (!brand.isPresent()) {
             throw new NotFoundException("Tên nhãn hiệu không tồn tại!");
         }
         try {
@@ -96,7 +96,7 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public Brand getBrandById(long id) {
         Optional<Brand> brand = brandRepository.findById(id);
-        if (brand.isPresent()) {
+        if (!brand.isPresent()) {
             throw new NotFoundException("Tên nhãn hiệu không tồn tại!");
         }
         return brand.get();
