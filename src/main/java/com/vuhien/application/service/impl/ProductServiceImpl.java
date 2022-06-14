@@ -134,7 +134,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product getProductById(String id) {
         Optional<Product> product = productRepository.findById(id);
-        if (product.isPresent()) {
+        if (!product.isPresent()) {
             throw new NotFoundException("Không tìm thấy sản phẩm trong hệ thống!");
         }
         return product.get();
@@ -251,7 +251,7 @@ public class ProductServiceImpl implements ProductService {
 
         //Kiểm trả size
         boolean isValid = false;
-        for (int size : SIZE_VN) {
+        for (int size : KBPS) {
             if (size == createSizeCountRequest.getSize()) {
                 isValid = true;
                 break;
